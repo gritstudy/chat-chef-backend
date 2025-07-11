@@ -27,21 +27,8 @@ app.get("/test", async (req, res) => {
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.post("/message", async (req, res) => {
-  const message = req.body.message;
-  console.log("🚀 ~ app.post ~ message:", message);
-  try {
-    res.json({
-      id: Date.now(),
-      message: message,
-    });
-  } catch (error) {
-    console.log(error);
-  }
-});
-
 // openai 정보 설정
-const OpenAi = new OpenAI({
+const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
 
