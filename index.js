@@ -9,7 +9,7 @@ import serverless from "serverless-http";
 
 const app = express();
 // cors 설정:  포트가 아니라 서버주소로
-// app.use(cors());
+//app.use(cors());
 // cors 이슈 해결
 const corsOption = {
   origin: "https://shiny-pasca-37f353.netlify.app", // 프론트엔드 배포 주소
@@ -21,17 +21,8 @@ app.use(cors(corsOption));
 const __dirname = path.resolve();
 dotenv.config({ path: __dirname + "/.env" });
 
-//test API
-app.get("/test", async (req, res) => {
-  try {
-    res.json({ data: "hyerim" });
-  } catch (error) {
-    console.log(error);
-  }
-});
-
 //프론트에서 받은 json 형태의 데이터를 객체로 파싱하여 사용
-app.use(express.json());
+app.use(express.json({ type: "*/*" }));
 app.use(express.urlencoded({ extended: true }));
 
 // openai 정보 설정
