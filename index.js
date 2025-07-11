@@ -41,7 +41,7 @@ app.post("/message", async (req, res) => {
 });
 
 // openai 정보 설정
-const openai = new OpenAI({
+const OpenAi = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
 
