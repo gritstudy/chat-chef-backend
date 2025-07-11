@@ -5,10 +5,17 @@ import cors from "cors";
 import path from "path";
 import * as dotenv from "dotenv";
 import OpenAI from "openai";
+import serverless from "serverless-http";
 
 const app = express();
-// cors 설정
-app.use(cors());
+// cors 설정:  포트가 아니라 서버주소로
+// app.use(cors());
+// cors 이슈 해결
+const corsOption = {
+  origin: "https://shiny-pasca-37f353.netlify.app", // 프론트엔드 배포 주소
+  credential: true,
+};
+app.use(cors(corsOption));
 
 //env 설정
 const __dirname = path.resolve();
@@ -96,4 +103,5 @@ const port = process.env.PORT || 8081;
 //   console.log("port", port);
 // });
 
-app.listen(port);
+// app.listen(port);
+export const handler = serverless(app);
